@@ -1,32 +1,58 @@
 {
-  "name": "next-places-autocomplete",
+  "name": "@aayush10001/next-places-autocomplete",
   "version": "0.1.0",
   "private": true,
+  "description": "Google Places Autocomplete component and hook for Next.js with field mask support",
+  "author": "Aayush Mahajan <you@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/next-places-autocomplete"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/next-places-autocomplete/issues"
+  },
+  "homepage": "https://github.com/yourusername/next-places-autocomplete#readme",
+  "keywords": [
+    "nextjs",
+    "google-maps",
+    "places-autocomplete",
+    "react",
+    "typescript"
+  ],
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "tsup",
+    "demoBuild": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@googlemaps/places": "^2.0.1",
+    "@radix-ui/react-dialog": "^1.1.14",
+    "@radix-ui/react-popover": "^1.1.14",
+    "@types/lodash.throttle": "^4.1.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "lodash.debounce": "^4.0.8",
+    "cmdk": "^1.1.1",
+    "lodash.throttle": "^4.1.1",
     "lucide-react": "^0.522.0",
     "next": "15.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^3.3.1",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
+    "eslint": "^9.29.0",
     "eslint-config-next": "15.3.4",
+    "prettier": "^3.5.3",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.4",
     "typescript": "^5"

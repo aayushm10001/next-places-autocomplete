@@ -2,17 +2,17 @@
   "name": "@aayush10001/next-places-autocomplete",
   "version": "0.1.0",
   "private": true,
-  "description": "Google Places Autocomplete component and hook for Next.js with field mask support",
-  "author": "Aayush Mahajan <you@example.com>",
+  "description": "Google Places (New) Autocomplete component and hook for Next.js",
+  "author": "Aayush Mahajan",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/next-places-autocomplete"
+    "url": "https://github.com/aayushm10001/next-places-autocomplete"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/next-places-autocomplete/issues"
+    "url": "https://github.com/aayushm10001/next-places-autocomplete/issues"
   },
-  "homepage": "https://github.com/yourusername/next-places-autocomplete#readme",
+  "homepage": "https://github.com/aayushm10001/next-places-autocomplete#readme",
   "keywords": [
     "nextjs",
     "google-maps",

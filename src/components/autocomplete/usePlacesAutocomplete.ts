@@ -1,17 +1,17 @@
 "use client";
 
-import { useMemo, useState } from "react";
-
-import throttle from "lodash.throttle";
-import { v4 as uuidv4 } from "uuid";
-
-import { autocomplete, placeDetails } from "@/server/googlemaps";
+import { autocomplete, placeDetails } from "./server";
 import type {
   AutocompleteRequest,
   PlaceDetails,
   PlaceDetailsRequest,
   PlacePrediction,
-} from "@/server/googlemaps";
+} from "./server";
+
+import { useMemo, useState } from "react";
+
+import throttle from "lodash.throttle";
+import { v4 as uuidv4 } from "uuid";
 
 export type UsePlacesAutocompleteProps = Omit<
   AutocompleteRequest & PlaceDetailsRequest,

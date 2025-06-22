@@ -2,8 +2,11 @@
 
 import { useState } from "react";
 
-import { PlacesAutocomplete, placeDetailsEssentialsFields } from "@/index";
-import type { PlaceDetails } from "@/server/googlemaps";
+import {
+  PlaceDetails,
+  PlacesAutocomplete,
+  placeDetailsEssentialsFields,
+} from "@/components/autocomplete";
 
 export default function Page() {
   const [details, setDetails] = useState<PlaceDetails | null>(null);

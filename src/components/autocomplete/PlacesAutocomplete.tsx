@@ -1,5 +1,11 @@
 "use client";
 
+import { PlaceDetails } from "./server";
+import {
+  UsePlacesAutocompleteProps,
+  usePlacesAutocomplete,
+} from "./usePlacesAutocomplete";
+
 import { useEffect, useState } from "react";
 
 import {
@@ -14,12 +20,7 @@ import {
   PopoverAnchor,
   PopoverContent,
 } from "@/components/ui/popover";
-import {
-  UsePlacesAutocompleteProps,
-  usePlacesAutocomplete,
-} from "@/hooks/usePlacesAutocomplete";
 import { cn } from "@/lib/utils";
-import { PlaceDetails } from "@/server/googlemaps";
 
 type PlacesAutocompleteComponentSpecificProps = {
   onSelectCallback: (details: PlaceDetails | null) => void;

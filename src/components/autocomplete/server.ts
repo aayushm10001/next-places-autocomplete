@@ -1,6 +1,7 @@
 "use server";
 
-import { PlacesClient, protos } from "@googlemaps/places";
+import { PlacesClient } from "@googlemaps/places";
+import type { protos } from "@googlemaps/places";
 
 const client = new PlacesClient({ apiKey: process.env.MAPS_API });
 

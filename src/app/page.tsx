@@ -2,11 +2,8 @@
 
 import { useState } from "react";
 
-import {
-  PlaceDetails,
-  PlacesAutocomplete,
-  placeDetailsEssentialsFields,
-} from "@/components/autocomplete";
+import { PlacesAutocomplete } from "@/app/PlacesAutocomplete";
+import { PlaceDetails, placeDetailsEssentialsFields } from "@/autocomplete";
 
 export default function Page() {
   const [details, setDetails] = useState<PlaceDetails | null>(null);

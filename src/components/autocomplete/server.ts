@@ -3,7 +3,7 @@
 import { PlacesClient } from "@googlemaps/places";
 import type { protos } from "@googlemaps/places";
 
-const client = new PlacesClient({ apiKey: process.env.MAPS_API });
+const client = new PlacesClient({ apiKey: process.env.GOOGLE_MAPS_API_KEY });
 
 export type AutocompleteRequest =
   protos.google.maps.places.v1.IAutocompletePlacesRequest;

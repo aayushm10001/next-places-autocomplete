@@ -1,5 +1,8 @@
 "use client";
 
+import { Command, CommandGroup, CommandItem, CommandList } from "../ui/command";
+import { Input } from "../ui/input";
+import { Popover, PopoverAnchor, PopoverContent } from "../ui/popover";
 import { PlaceDetails } from "./server";
 import {
   UsePlacesAutocompleteProps,
@@ -7,19 +10,6 @@ import {
 } from "./usePlacesAutocomplete";
 
 import { useEffect, useState } from "react";
-
-import {
-  Command,
-  CommandGroup,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
-import { Input } from "@/components/ui/input";
-import {
-  Popover,
-  PopoverAnchor,
-  PopoverContent,
-} from "@/components/ui/popover";
 
 type PlacesAutocompleteComponentSpecificProps = {
   onSelectCallback: (details: PlaceDetails | null) => void;

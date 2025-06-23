@@ -1,13 +1,12 @@
 {
   "name": "@aayush10001/next-places-autocomplete",
   "version": "0.1.0",
-  "private": true,
-  "description": "Google Places (New) Autocomplete component and hook for Next.js",
+  "description": "Google Places (New + Sessionized) Autocomplete component and hook for Next.js 14+",
   "author": "Aayush Mahajan",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aayushm10001/next-places-autocomplete"
+    "url": "git+https://github.com/aayushm10001/next-places-autocomplete.git"
   },
   "bugs": {
     "url": "https://github.com/aayushm10001/next-places-autocomplete/issues"
@@ -17,15 +16,39 @@
     "nextjs",
     "google-maps",
     "places-autocomplete",
-    "react",
-    "typescript"
+    "places-autocomplete-new",
+    "debounce",
+    "throttle",
+    "session",
+    "server-functions",
+    "shadcn",
+    "headless",
+    "hook",
+    "headless-component",
+    "headless-hook",
+    "session-token"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/client/index.d.ts",
+      "import": "./dist/client/index.js"
+    }
+  },
+  "main": "./dist/client/index.js",
+  "types": "./dist/client/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "tsup",
+    "build": "tsc -p tsconfig.build.json",
     "demoBuild": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
     "@googlemaps/places": "^2.0.1",
@@ -37,11 +60,13 @@
     "cmdk": "^1.1.1",
     "lodash.throttle": "^4.1.1",
     "lucide-react": "^0.522.0",
-    "next": "15.3.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
     "tailwind-merge": "^3.3.1",
     "uuid": "^11.1.0"
+  },
+  "peerDependencies": {
+    "next": "^14.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -18,15 +18,17 @@ export default function Page() {
           Next Places Autocomplete
         </h1>
 
-        <div className="flex justify-center">
-          <PlacesAutocomplete
-            onSelectCallback={(selectedDetails) => {
-              setDetails(selectedDetails);
-            }}
-            requestedPlaceDetails={placeDetailsEssentialsFields}
-            includedPrimaryTypes={["(regions)"]}
-            throttle_ms={400}
-          />
+        <div className="flex justify-center w-full">
+          <div className="w-full max-w-md">
+            <PlacesAutocomplete
+              onSelectCallback={(selectedDetails) => {
+                setDetails(selectedDetails);
+              }}
+              requestedPlaceDetails={placeDetailsEssentialsFields}
+              includedPrimaryTypes={["(regions)"]}
+              throttle_ms={400}
+            />
+          </div>
         </div>
 
         {details && (

@@ -20,7 +20,6 @@ import {
   PopoverAnchor,
   PopoverContent,
 } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
 
 type PlacesAutocompleteComponentSpecificProps = {
   onSelectCallback: (details: PlaceDetails | null) => void;
@@ -47,7 +46,7 @@ export function PlacesAutocomplete(props: PlacesAutocompleteProps) {
   return (
     <Popover open={shouldShowPopover}>
       <PopoverAnchor asChild>
-        <div className="relative w-[300px]">
+        <div className="relative w-full">
           <Input
             value={input}
             placeholder={placeholder}
@@ -57,14 +56,13 @@ export function PlacesAutocomplete(props: PlacesAutocompleteProps) {
             }}
             onFocus={() => setOpen(true)}
             onBlur={() => setOpen(false)}
-            className={cn("h-10", props.className)}
+            className={props.className}
           />
         </div>
       </PopoverAnchor>
       <PopoverContent
-        className="w-[300px] p-0 shadow-md border rounded-md z-50"
-        side="bottom"
-        align="start"
+        className="relative p-0"
+        style={{ width: "var(--radix-popover-trigger-width)" }}
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
         <Command shouldFilter={false}>
@@ -78,6 +76,7 @@ export function PlacesAutocomplete(props: PlacesAutocompleteProps) {
                     setOpen(false);
                     await onSelect(suggestion.place!, suggestion.text!.text!);
                   }}
+                  style={{ height: "var(--radix-popover-trigger-height)" }}
                 >
                   {suggestion.text!.text!}
                 </CommandItem>

@@ -1,6 +1,6 @@
 {
   "name": "@aayush10001/next-places-autocomplete",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Google Places (New + Sessionized) Autocomplete component and hook for Next.js 14+",
   "author": "Aayush Mahajan",
   "license": "MIT",

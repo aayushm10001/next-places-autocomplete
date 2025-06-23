@@ -11,10 +11,10 @@
     "declarationMap": true,
     "noEmit": false,
     "allowJs": false,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "esModuleInterop": true,
     "preserveConstEnums": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "stripInternal": true
   },
   "include": [

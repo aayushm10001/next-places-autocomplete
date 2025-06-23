@@ -1,6 +1,6 @@
 {
   "name": "@aayush10001/next-places-autocomplete",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Google Places (New + Sessionized) Autocomplete component and hook for Next.js 14+",
   "author": "Aayush Mahajan",
   "license": "MIT",
@@ -33,12 +33,12 @@
   },
   "exports": {
     ".": {
-      "types": "./dist/client/index.d.ts",
-      "import": "./dist/client/index.js"
+      "import": "./dist/components/autocomplete/index.js",
+      "types": "./dist/components/autocomplete/index.d.ts"
     }
   },
-  "main": "./dist/client/index.js",
-  "types": "./dist/client/index.d.ts",
+  "main": "./dist/components/autocomplete/index.js",
+  "types": "./dist/components/autocomplete/index.d.ts",
   "files": [
     "dist",
     "src",

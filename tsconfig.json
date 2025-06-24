@@ -20,7 +20,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@aayush10001/next-places-autocomplete": ["./src/autocomplete"]
+      "@aayush10001/next-places-autocomplete-headless": ["./src/autocomplete"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

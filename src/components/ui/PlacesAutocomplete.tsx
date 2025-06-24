@@ -6,7 +6,7 @@ import {
   PlaceDetails,
   UsePlacesAutocompleteProps,
   usePlacesAutocomplete,
-} from "@aayush10001/next-places-autocomplete";
+} from "@aayush10001/next-places-autocomplete-headless";
 
 import {
   Command,

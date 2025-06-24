@@ -5,7 +5,7 @@ import { useState } from "react";
 import {
   PlaceDetails,
   placeDetailsEssentialsFields,
-} from "@aayush10001/next-places-autocomplete";
+} from "@aayush10001/next-places-autocomplete-headless";
 
 import { PlacesAutocomplete } from "@/components/ui/PlacesAutocomplete";
 

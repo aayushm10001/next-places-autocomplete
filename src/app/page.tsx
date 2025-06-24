@@ -7,7 +7,7 @@ import {
   placeDetailsEssentialsFields,
 } from "@aayush10001/next-places-autocomplete";
 
-import { PlacesAutocomplete } from "@/components/PlacesAutocomplete";
+import { PlacesAutocomplete } from "@/components/ui/PlacesAutocomplete";
 
 export default function Page() {
   const [details, setDetails] = useState<PlaceDetails | null>(null);

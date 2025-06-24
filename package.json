@@ -1,6 +1,6 @@
 {
   "name": "@aayush10001/next-places-autocomplete-headless",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Google Maps Places (New) Sessionized Autocomplete hook for Next.js 14+",
   "author": "Aayush Mahajan",
   "license": "MIT",
@@ -46,11 +46,14 @@
   ],
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "tsc -p tsconfig.build.json",
-    "demoBuild": "next build",
+    "build:component": "pnpm dlx shadcn@latest build ./shadcn/registry.json --output ./shadcn",
+    "build:hook": "tsc -p tsconfig.build.json",
+    "build:dist": "pnpm run build:hook && pnpm run build:component",
+    "build:app": "next build",
+    "build": "pnpm run build:dist && pnpm run build:app",
     "start": "next start",
     "lint": "next lint",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "pnpm run build:dist"
   },
   "dependencies": {
     "@googlemaps/places": "^2.0.1",

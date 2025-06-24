@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "next-places-autocomplete",
+  "type": "registry:component",
+  "title": "Place Autocomplete Component for NextJs 14+",
+  "author": "Aayush Mahajan",
+  "description": "Google Maps Places (New) Sessionized Autocomplete component for Next.js 14+",
+  "dependencies": [
+    "@aayush10001/next-places-autocomplete-headless"
+  ],
+  "registryDependencies": [
+    "command",
+    "input",
+    "popover"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/PlacesAutocomplete.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useState } from \"react\";\n\nimport {\n  PlaceDetails,\n  UsePlacesAutocompleteProps,\n  usePlacesAutocomplete,\n} from \"@aayush10001/next-places-autocomplete-headless\";\n\nimport {\n  Command,\n  CommandGroup,\n  CommandItem,\n  CommandList,\n} from \"@/components/ui/command\";\nimport { Input } from \"@/components/ui/input\";\nimport {\n  Popover,\n  PopoverAnchor,\n  PopoverContent,\n} from \"@/components/ui/popover\";\n\ntype PlacesAutocompleteComponentSpecificProps = {\n  onSelectCallback: (details: PlaceDetails | null) => void;\n  placeholder?: string;\n  className?: string;\n};\nexport type PlacesAutocompleteProps = UsePlacesAutocompleteProps &\n  PlacesAutocompleteComponentSpecificProps;\n\nexport function PlacesAutocomplete(props: PlacesAutocompleteProps) {\n  const [open, setOpen] = useState(false);\n  const { input, suggestions, selectedPlaceDetails, onChange, onSelect } =\n    usePlacesAutocomplete(props);\n\n  // Notify selection change to user\n  const onSelectCallback = props.onSelectCallback;\n  useEffect(() => {\n    onSelectCallback(selectedPlaceDetails);\n  }, [onSelectCallback, selectedPlaceDetails]);\n\n  const shouldShowPopover = open && suggestions.length > 0;\n  const placeholder = props.placeholder ?? \"Search for a place...\";\n\n  return (\n    <Popover open={shouldShowPopover}>\n      <PopoverAnchor asChild>\n        <div className=\"relative w-full\">\n          <Input\n            value={input}\n            placeholder={placeholder}\n            onChange={(e) => {\n              props.onSelectCallback(null);\n              onChange(e.target.value);\n            }}\n            onFocus={() => setOpen(true)}\n            onBlur={() => setOpen(false)}\n            className={props.className}\n          />\n        </div>\n      </PopoverAnchor>\n      <PopoverContent\n        className=\"relative p-0\"\n        style={{ width: \"var(--radix-popover-trigger-width)\" }}\n        onOpenAutoFocus={(e) => e.preventDefault()}\n      >\n        <Command shouldFilter={false}>\n          <CommandList>\n            <CommandGroup>\n              {suggestions.map((suggestion) => (\n                <CommandItem\n                  key={suggestion.place!}\n                  value={suggestion.place!}\n                  onSelect={async () => {\n                    setOpen(false);\n                    await onSelect(suggestion.place!, suggestion.text!.text!);\n                  }}\n                  style={{ height: \"var(--radix-popover-trigger-height)\" }}\n                >\n                  {suggestion.text!.text!}\n                </CommandItem>\n              ))}\n            </CommandGroup>\n          </CommandList>\n        </Command>\n      </PopoverContent>\n    </Popover>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "docs": "Remember to add the GOOGLE_MAPS_PLACES_API_KEY environment variable to your .env file."
+}

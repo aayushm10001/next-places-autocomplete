@@ -6,7 +6,8 @@ import {
   PlaceDetails,
   UsePlacesAutocompleteProps,
   usePlacesAutocomplete,
-} from "@/autocomplete";
+} from "@aayush10001/next-places-autocomplete";
+
 import {
   Command,
   CommandGroup,

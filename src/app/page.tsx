@@ -8,6 +8,7 @@ import {
 } from "@aayush10001/next-places-autocomplete-headless";
 
 import { PlacesAutocomplete } from "@/components/ui/PlacesAutocomplete";
+import { Label } from "@/components/ui/label";
 
 export default function Page() {
   const [details, setDetails] = useState<PlaceDetails | null>(null);
@@ -20,14 +21,16 @@ export default function Page() {
         </h1>
 
         <div className="flex justify-center w-full">
-          <div className="w-full max-w-md">
+          <div className="flex flex-row w-full max-w-md items-center gap-2">
+            <Label htmlFor="places">Label:</Label>
             <PlacesAutocomplete
-              onSelectCallback={(selectedDetails) => {
+              onPlaceDetailsChangeCallback={(selectedDetails) => {
                 setDetails(selectedDetails);
               }}
               requestedPlaceDetails={placeDetailsEssentialsFields}
               includedPrimaryTypes={["(regions)"]}
               throttle_ms={400}
+              id="places"
             />
           </div>
         </div>

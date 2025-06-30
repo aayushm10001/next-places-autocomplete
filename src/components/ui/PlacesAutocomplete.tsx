@@ -22,23 +22,17 @@ import {
 } from "@/components/ui/popover";
 
 type PlacesAutocompleteComponentSpecificProps = {
-  onSelectCallback: (details: PlaceDetails | null) => void;
   placeholder?: string;
   className?: string;
+  id?: string;
 };
 export type PlacesAutocompleteProps = UsePlacesAutocompleteProps &
   PlacesAutocompleteComponentSpecificProps;
 
 export function PlacesAutocomplete(props: PlacesAutocompleteProps) {
   const [open, setOpen] = useState(false);
-  const { input, suggestions, selectedPlaceDetails, onChange, onSelect } =
+  const { input, suggestions, onChange, onSelect } =
     usePlacesAutocomplete(props);
-
-  // Notify selection change to user
-  const onSelectCallback = props.onSelectCallback;
-  useEffect(() => {
-    onSelectCallback(selectedPlaceDetails);
-  }, [onSelectCallback, selectedPlaceDetails]);
 
   const shouldShowPopover = open && suggestions.length > 0;
   const placeholder = props.placeholder ?? "Search for a place...";
@@ -46,22 +40,21 @@ export function PlacesAutocomplete(props: PlacesAutocompleteProps) {
   return (
     <Popover open={shouldShowPopover}>
       <PopoverAnchor asChild>
-        <div className="relative w-full">
-          <Input
-            value={input}
-            placeholder={placeholder}
-            onChange={(e) => {
-              props.onSelectCallback(null);
-              onChange(e.target.value);
-            }}
-            onFocus={() => setOpen(true)}
-            onBlur={() => setOpen(false)}
-            className={props.className}
-          />
-        </div>
+        <Input
+          id={props.id}
+          value={input}
+          placeholder={placeholder}
+          onChange={(e) => {
+            onChange(e.target.value);
+          }}
+          onFocus={() => setOpen(true)}
+          onBlur={() => setOpen(false)}
+          autoComplete="off"
+          className={props.className}
+        />
       </PopoverAnchor>
       <PopoverContent
-        className="relative p-0"
+        className="p-0"
         style={{ width: "var(--radix-popover-trigger-width)" }}
         onOpenAutoFocus={(e) => e.preventDefault()}
       >

@@ -16,14 +16,16 @@ import { v4 as uuidv4 } from "uuid";
 export type UsePlacesAutocompleteProps = Omit<
   AutocompleteRequest & PlaceDetailsRequest,
   "input" | "name" | "sessionToken"
-> & { throttle_ms?: number };
+> & {
+  throttle_ms?: number;
+  onPlaceDetailsChangeCallback?: (details: PlaceDetails | null) => void;
+};
 
 export function usePlacesAutocomplete(props: UsePlacesAutocompleteProps) {
   const [input, setInput] = useState("");
   const [suggestions, setSuggestions] = useState<PlacePrediction[]>([]);
-  const [selectedPlaceDetails, setSelectedPlaceDetails] =
-    useState<PlaceDetails | null>(null);
   const [sessionToken, setSessionToken] = useState<string>(uuidv4());
+  const [sessionComplete, setSessionComplete] = useState<boolean>(false);
 
   // Need to useMemo here, otherwise a new fetchSuggesions will be created
   // every render, which will effectively remove throttling.
@@ -41,8 +43,11 @@ export function usePlacesAutocomplete(props: UsePlacesAutocompleteProps) {
 
   const onChange = (value: string) => {
     setInput(value);
-    // null-out selectedPlaceDetails as input has changed
-    setSelectedPlaceDetails(null);
+    if (sessionComplete) {
+      // Last session was completed. Clear user's stale copy of place details.
+      props.onPlaceDetailsChangeCallback?.(null);
+      setSessionComplete(false);
+    }
     if (value === "") {
       setSuggestions([]);
     } else {
@@ -60,15 +65,15 @@ export function usePlacesAutocomplete(props: UsePlacesAutocompleteProps) {
       ...props,
     });
     setInput(autocompleted_input);
-    setSelectedPlaceDetails(details);
-    // Current session is complete. Reset session token.
+    props.onPlaceDetailsChangeCallback?.(details);
+    setSessionComplete(true);
+    // Set sessionToken for next session
     setSessionToken(uuidv4());
   };
 
   return {
     input,
     suggestions,
-    selectedPlaceDetails,
     onChange,
     onSelect,
   };

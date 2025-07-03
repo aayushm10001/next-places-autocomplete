@@ -53,7 +53,7 @@ export function PlacesAutocomplete(props: PlacesAutocompleteProps) {
             onFocus={() => setOpen(true)}
             onBlur={() => setOpen(false)}
             autoComplete="off"
-            className={cn("pl-8", props.className)}
+            className={cn("pl-9", props.className)}
           />
         </div>
       </PopoverAnchor>

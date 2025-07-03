@@ -10,7 +10,10 @@
       "description": "Google Maps Places (New) Sessionized Autocomplete component for Next.js 14+",
       "type": "registry:component",
       "author": "Aayush Mahajan",
-      "dependencies": ["@aayush10001/next-places-autocomplete-headless"],
+      "dependencies": [
+        "@aayush10001/next-places-autocomplete-headless",
+        "@phosphor-icons/react"
+      ],
       "registryDependencies": ["command", "input", "popover"],
       "files": [
         {

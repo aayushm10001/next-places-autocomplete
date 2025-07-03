@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import {
-  PlaceDetails,
   UsePlacesAutocompleteProps,
   usePlacesAutocomplete,
 } from "@aayush10001/next-places-autocomplete-headless";
+import { MagnifyingGlassIcon } from "@phosphor-icons/react";
 
 import {
   Command,
@@ -20,6 +20,7 @@ import {
   PopoverAnchor,
   PopoverContent,
 } from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 
 type PlacesAutocompleteComponentSpecificProps = {
   placeholder?: string;
@@ -40,18 +41,21 @@ export function PlacesAutocomplete(props: PlacesAutocompleteProps) {
   return (
     <Popover open={shouldShowPopover}>
       <PopoverAnchor asChild>
-        <Input
-          id={props.id}
-          value={input}
-          placeholder={placeholder}
-          onChange={(e) => {
-            onChange(e.target.value);
-          }}
-          onFocus={() => setOpen(true)}
-          onBlur={() => setOpen(false)}
-          autoComplete="off"
-          className={props.className}
-        />
+        <div className="relative w-full">
+          <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input
+            id={props.id}
+            value={input}
+            placeholder={placeholder}
+            onChange={(e) => {
+              onChange(e.target.value);
+            }}
+            onFocus={() => setOpen(true)}
+            onBlur={() => setOpen(false)}
+            autoComplete="off"
+            className={cn("pl-8", props.className)}
+          />
+        </div>
       </PopoverAnchor>
       <PopoverContent
         className="p-0"

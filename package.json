@@ -1,6 +1,6 @@
 {
   "name": "@aayush10001/next-places-autocomplete-headless",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Google Maps Places (New) Sessionized Autocomplete hook for Next.js 14+",
   "author": "Aayush Mahajan",
   "license": "MIT",
@@ -18,7 +18,6 @@
     "places-autocomplete",
     "places-autocomplete-new",
     "debounce",
-    "throttle",
     "session",
     "session-token",
     "server-functions",
@@ -57,8 +56,7 @@
   },
   "dependencies": {
     "@googlemaps/places": "^2.0.1",
-    "@types/lodash.throttle": "^4.1.9",
-    "lodash.throttle": "^4.1.1",
+    "@tanstack/react-query": "^5.84.2",
     "uuid": "^11.1.0"
   },
   "peerDependencies": {

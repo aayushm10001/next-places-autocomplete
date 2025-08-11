@@ -6,7 +6,18 @@ import * as serverApi from "./server";
 
 import React, { createContext, useContext, useMemo } from "react";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 const PlacesApiContext = createContext<PlacesApi | null>(null);
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: "static",
+      gcTime: 30 * 60 * 1000,
+    },
+  },
+});
 
 export interface PlacesApiProviderProps {
   implementation: PlacesApiImplementation;
@@ -35,9 +46,11 @@ export function PlacesApiProvider({
   }, [implementation]);
 
   return (
-    <PlacesApiContext.Provider value={api}>
-      {children}
-    </PlacesApiContext.Provider>
+    <QueryClientProvider client={queryClient}>
+      <PlacesApiContext.Provider value={api}>
+        {children}
+      </PlacesApiContext.Provider>
+    </QueryClientProvider>
   );
 }
 

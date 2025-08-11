@@ -35,7 +35,6 @@ export default function Page() {
                 autocompleteProps={{
                   includedPrimaryTypes: ["(regions)"],
                 }}
-                // throttle_ms={400}
                 id="places"
               />
             </PlacesApiProvider>

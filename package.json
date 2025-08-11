@@ -1,6 +1,6 @@
 {
   "name": "@aayush10001/next-places-autocomplete-headless",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Google Maps Places (New) Sessionized Autocomplete hook for Next.js 14+",
   "author": "Aayush Mahajan",
   "license": "MIT",

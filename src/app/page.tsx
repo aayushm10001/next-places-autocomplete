@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import {
   PlaceDetails,
+  PlacesApiProvider,
   placeDetailsEssentialsFields,
 } from "@aayush10001/next-places-autocomplete-headless";
 
@@ -23,15 +24,21 @@ export default function Page() {
         <div className="flex justify-center w-full">
           <div className="flex flex-row w-full max-w-md items-center gap-2">
             <Label htmlFor="places">Label:</Label>
-            <PlacesAutocomplete
-              onPlaceDetailsChangeCallback={(selectedDetails) => {
-                setDetails(selectedDetails);
-              }}
-              requestedPlaceDetails={placeDetailsEssentialsFields}
-              includedPrimaryTypes={["(regions)"]}
-              throttle_ms={400}
-              id="places"
-            />
+            <PlacesApiProvider implementation="client">
+              <PlacesAutocomplete
+                onPlaceDetailsChangeCallback={(selectedDetails) => {
+                  setDetails(selectedDetails);
+                }}
+                placeDetailsProps={{
+                  requestedPlaceDetails: placeDetailsEssentialsFields,
+                }}
+                autocompleteProps={{
+                  includedPrimaryTypes: ["(regions)"],
+                }}
+                // throttle_ms={400}
+                id="places"
+              />
+            </PlacesApiProvider>
           </div>
         </div>
 

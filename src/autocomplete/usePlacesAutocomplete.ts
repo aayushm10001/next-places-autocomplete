@@ -1,27 +1,27 @@
 "use client";
 
-import { autocomplete, placeDetails } from "./server";
+import { usePlacesApi } from "./api/PlacesApiProvider";
 import type {
   AutocompleteRequest,
   PlaceDetails,
   PlaceDetailsRequest,
   PlacePrediction,
-} from "./server";
+} from "./api/interface";
 
 import { useMemo, useState } from "react";
 
 import throttle from "lodash.throttle";
 import { v4 as uuidv4 } from "uuid";
 
-export type UsePlacesAutocompleteProps = Omit<
-  AutocompleteRequest & PlaceDetailsRequest,
-  "input" | "name" | "sessionToken"
-> & {
+export type UsePlacesAutocompleteProps = {
+  autocompleteProps?: Omit<AutocompleteRequest, "input" | "sessionToken">;
+  placeDetailsProps: Omit<PlaceDetailsRequest, "name" | "sessionToken">;
   throttle_ms?: number;
   onPlaceDetailsChangeCallback?: (details: PlaceDetails | null) => void;
 };
 
 export function usePlacesAutocomplete(props: UsePlacesAutocompleteProps) {
+  const api = usePlacesApi();
   const [input, setInput] = useState("");
   const [suggestions, setSuggestions] = useState<PlacePrediction[]>([]);
   const [sessionToken, setSessionToken] = useState<string>(uuidv4());
@@ -32,14 +32,14 @@ export function usePlacesAutocomplete(props: UsePlacesAutocompleteProps) {
   const fetchSuggestions = useMemo(() => {
     const throttle_ms = props.throttle_ms ?? 0;
     return throttle(async (input: string) => {
-      const predictions = await autocomplete({
+      const predictions = await api.autocomplete({
         input,
         sessionToken,
-        ...props,
+        ...props.autocompleteProps,
       } as AutocompleteRequest);
       setSuggestions(predictions);
     }, throttle_ms);
-  }, [sessionToken, props]);
+  }, [sessionToken, props, api]);
 
   const onChange = (value: string) => {
     setInput(value);
@@ -59,10 +59,10 @@ export function usePlacesAutocomplete(props: UsePlacesAutocompleteProps) {
     place: string,
     autocompleted_input: string,
   ): Promise<void> => {
-    const details = await placeDetails({
+    const details = await api.placeDetails({
       name: `${place}`,
       sessionToken,
-      ...props,
+      ...props.placeDetailsProps,
     });
     setInput(autocompleted_input);
     props.onPlaceDetailsChangeCallback?.(details);

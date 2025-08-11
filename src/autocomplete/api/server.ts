@@ -1,16 +1,17 @@
 "use server";
 
+import type {
+  AutocompleteRequest,
+  PlaceDetails,
+  PlaceDetailsRequest,
+  PlacePrediction,
+} from "./interface";
+
 import { PlacesClient } from "@googlemaps/places";
-import type { protos } from "@googlemaps/places";
 
 const client = new PlacesClient({
   apiKey: process.env.GOOGLE_MAPS_PLACES_API_KEY,
 });
-
-export type AutocompleteRequest =
-  protos.google.maps.places.v1.IAutocompletePlacesRequest;
-export type PlacePrediction =
-  protos.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IPlacePrediction;
 
 export async function autocomplete(
   request: AutocompleteRequest,
@@ -25,12 +26,6 @@ export async function autocomplete(
       ) ?? []
   );
 }
-
-export type PlaceDetailsRequest =
-  protos.google.maps.places.v1.IGetPlaceRequest & {
-    requestedPlaceDetails: string[];
-  };
-export type PlaceDetails = protos.google.maps.places.v1.IPlace;
 
 export async function placeDetails(
   request: PlaceDetailsRequest,

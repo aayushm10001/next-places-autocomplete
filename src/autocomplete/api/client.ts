@@ -1,11 +1,15 @@
-import type {
-  AutocompleteRequest,
-  PlaceDetails,
-  PlaceDetailsRequest,
-  PlacePrediction,
-} from "./interface";
-
 import type { protos } from "@googlemaps/places";
+
+// Type definitions
+export type AutocompleteRequest =
+  protos.google.maps.places.v1.IAutocompletePlacesRequest;
+export type PlaceDetailsRequest =
+  protos.google.maps.places.v1.IGetPlaceRequest & {
+    requestedPlaceDetails: string[];
+  };
+export type PlacePrediction =
+  protos.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IPlacePrediction;
+export type PlaceDetails = protos.google.maps.places.v1.IPlace;
 
 export async function autocomplete(
   request: AutocompleteRequest,

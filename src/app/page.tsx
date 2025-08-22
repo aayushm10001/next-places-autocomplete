@@ -24,7 +24,7 @@ export default function Page() {
         <div className="flex justify-center w-full">
           <div className="flex flex-row w-full max-w-md items-center gap-2">
             <Label htmlFor="places">Label:</Label>
-            <PlacesApiProvider implementation="client">
+            <PlacesApiProvider>
               <PlacesAutocomplete
                 onPlaceDetailsChangeCallback={(selectedDetails) => {
                   setDetails(selectedDetails);

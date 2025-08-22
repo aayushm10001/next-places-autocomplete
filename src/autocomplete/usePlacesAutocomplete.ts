@@ -1,11 +1,11 @@
 "use client";
 
-import { usePlacesApi } from "./api/PlacesApiProvider";
+import * as clientApi from "./api/client";
 import type {
   AutocompleteRequest,
   PlaceDetails,
   PlaceDetailsRequest,
-} from "./api/interface";
+} from "./api/client";
 
 import { useState } from "react";
 
@@ -19,7 +19,6 @@ export type UsePlacesAutocompleteProps = {
 };
 
 export function usePlacesAutocomplete(props: UsePlacesAutocompleteProps) {
-  const api = usePlacesApi();
   const [input, setInput] = useState("");
   const [sessionToken, setSessionToken] = useState<string>(uuidv4());
   const [sessionComplete, setSessionComplete] = useState<boolean>(false);
@@ -29,7 +28,7 @@ export function usePlacesAutocomplete(props: UsePlacesAutocompleteProps) {
     queryKey: ["places-autocomplete", input, props.autocompleteProps],
     queryFn: () => {
       if (!input || sessionComplete) return [];
-      return api.autocomplete({
+      return clientApi.autocomplete({
         input,
         sessionToken,
         ...props.autocompleteProps,
@@ -51,7 +50,7 @@ export function usePlacesAutocomplete(props: UsePlacesAutocompleteProps) {
     place: string,
     autocompleted_input: string,
   ): Promise<void> => {
-    const details = await api.placeDetails({
+    const details = await clientApi.placeDetails({
       name: `${place}`,
       sessionToken,
       ...props.placeDetailsProps,

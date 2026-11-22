@@ -13,15 +13,22 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { v4 as uuidv4 } from "uuid";
 
 export type UsePlacesAutocompleteProps = {
+  initialInput?: string;
+  initialSessionComplete?: boolean;
   autocompleteProps?: Omit<AutocompleteRequest, "input" | "sessionToken">;
   placeDetailsProps: Omit<PlaceDetailsRequest, "name" | "sessionToken">;
-  onPlaceDetailsChangeCallback?: (details: PlaceDetails | null) => void;
+  onPlaceDetailsChangeCallback?: (
+    details: PlaceDetails | null,
+    autocompletedInput?: string,
+  ) => void;
 };
 
 export function usePlacesAutocomplete(props: UsePlacesAutocompleteProps) {
-  const [input, setInput] = useState("");
-  const [sessionToken, setSessionToken] = useState<string>(uuidv4());
-  const [sessionComplete, setSessionComplete] = useState<boolean>(false);
+  const [input, setInput] = useState(props.initialInput ?? "");
+  const [sessionToken, setSessionToken] = useState<string>(() => uuidv4());
+  const [sessionComplete, setSessionComplete] = useState<boolean>(
+    props.initialSessionComplete ?? false,
+  );
 
   // Autocomplete query - excludes sessionToken from key for cross-session caching
   const { data: suggestions = [] } = useQuery({
@@ -41,7 +48,7 @@ export function usePlacesAutocomplete(props: UsePlacesAutocompleteProps) {
     setInput(value);
     if (sessionComplete) {
       // Last session was completed. Clear user's stale copy of place details.
-      props.onPlaceDetailsChangeCallback?.(null);
+      props.onPlaceDetailsChangeCallback?.(null, value);
       setSessionComplete(false);
     }
   };
@@ -56,7 +63,7 @@ export function usePlacesAutocomplete(props: UsePlacesAutocompleteProps) {
       ...props.placeDetailsProps,
     });
     setInput(autocompleted_input);
-    props.onPlaceDetailsChangeCallback?.(details);
+    props.onPlaceDetailsChangeCallback?.(details, autocompleted_input);
     setSessionComplete(true);
     // Set sessionToken for next session
     setSessionToken(uuidv4());

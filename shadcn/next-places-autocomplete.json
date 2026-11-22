@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "next-places-autocomplete",
-  "type": "registry:component",
   "title": "Place Autocomplete Component for NextJs 14+",
   "author": "Aayush Mahajan",
   "description": "Google Maps Places (New) Sessionized Autocomplete component for Next.js 14+",
@@ -21,5 +20,6 @@
       "type": "registry:component"
     }
   ],
-  "docs": "Remember to add the GOOGLE_MAPS_PLACES_API_KEY environment variable to your .env file."
+  "docs": "Remember to add the GOOGLE_MAPS_PLACES_API_KEY environment variable to your .env file.",
+  "type": "registry:component"
 }
